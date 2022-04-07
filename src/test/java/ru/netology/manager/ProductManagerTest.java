@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import ru.netology.domain.Book;
 import ru.netology.domain.Product;
 import ru.netology.domain.Smartphone;
-import ru.netology.domain.Tshirt;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,10 +37,10 @@ class ProductManagerTest {
     }
 
     @Test
-        // book, должен вернуть пустой массив
-    void shouldReturnZeroBookTest() {
+        // должен вернуть пустой массив
+    void shouldReturnZeroProductTest() {
         prepareProduct();
-        String search = "Pasternak";
+        String search = "iPad";
         Product[] expected = productManager.searchBy(search);
         Product[] actual = new Product[0];
         assertArrayEquals(expected, actual);
@@ -49,62 +48,7 @@ class ProductManagerTest {
     }
 
     @Test
-        // smartphone, должен вернуть пустой массив
-    void shouldReturnZeroSmartphoneTest() {
-        prepareProduct();
-        String search = "Motorola";
-        Product[] expected = productManager.searchBy(search);
-        Product[] actual = new Product[0];
-        assertArrayEquals(expected, actual);
-
-    }
-
-    @Test
-        // book, должен вернуть массив из 1 элементов
-    void shouldReturnOneBookTest() {
-        prepareProduct();
-        String search = "Pushkin";
-        Product[] expected = productManager.searchBy(search);
-        Product[] actual = new Product[]{book4};
-        assertArrayEquals(expected, actual);
-
-    }
-
-    @Test
-        // smartphone, должен вернуть массив из 1 элементов
-    void shouldReturnOneSmartphoneTest() {
-        prepareProduct();
-        String search = "Apple";
-        Product[] expected = productManager.searchBy(search);
-        Product[] actual = new Product[]{smartphone1};
-        assertArrayEquals(expected, actual);
-
-    }
-
-    @Test
-        // book, должен вернуть массив из 2 элементов
-    void shouldReturnTwoBookTest() {
-        prepareProduct();
-        String search = "Chekhov";
-        Product[] expected = productManager.searchBy(search);
-        Product[] actual = new Product[]{book1, book2};
-        assertArrayEquals(expected, actual);
-
-    }
-
-    @Test
-        // smartphone, должен вернуть массив из 2 элементов
-    void shouldReturnTwoSmartphoneTest() {
-        prepareProduct();
-        String search = "Samsung";
-        Product[] expected = productManager.searchBy(search);
-        Product[] actual = new Product[]{smartphone4, smartphone5};
-        assertArrayEquals(expected, actual);
-
-    }
-
-    @Test
-        // book, должен вернуть массив содержащий все книги
+        // должен вернуть массив содержащий все книги
     void shouldReturnAllBookTest() {
         prepareProduct();
         String search = "Book";
@@ -114,7 +58,7 @@ class ProductManagerTest {
     }
 
     @Test
-        // smartphone, должен вернуть массив содержащий все смартфоны
+        // должен вернуть массив содержащий все смартфоны
     void shouldReturnAllSmartphoneTest() {
         prepareProduct();
         String search = "Smartphone";
@@ -135,19 +79,6 @@ class ProductManagerTest {
     }
 
     @Test
-        // Должен добавить 1 книгу и 1 смартфон
-    void shouldAddOneBookAndOneSmartphoneTest() {
-        prepareProduct();
-        Book book6 = new Book(6, "Book", 500, "Chekhov");
-        Smartphone smartphone6 = new Smartphone(6, "Smartphone", 200000, "Apple");
-        productManager.add(book6);
-        productManager.add(smartphone6);
-        Product[] expected = productManager.findAll();
-        Product[] actual = new Product[]{book1, book2, book3, book4, book5, smartphone1, smartphone2, smartphone3, smartphone4, smartphone5, book6, smartphone6};
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
         // Должен добавить 1 смартфон
     void shouldAddOneSmartphoneTest() {
         prepareProduct();
@@ -158,39 +89,4 @@ class ProductManagerTest {
         assertArrayEquals(expected, actual);
     }
 
-    @Test
-        // Должен добавить 2 смартфона
-    void shouldAddTwoSmartphoneTest() {
-        prepareProduct();
-        Smartphone smartphone6 = new Smartphone(6, "Smartphone", 200000, "Apple");
-        Smartphone smartphone7 = new Smartphone(7, "Smartphone", 222000, "Apple");
-        productManager.add(smartphone6);
-        productManager.add(smartphone7);
-        Product[] expected = productManager.findAll();
-        Product[] actual = new Product[]{book1, book2, book3, book4, book5, smartphone1, smartphone2, smartphone3, smartphone4, smartphone5, smartphone6, smartphone7};
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-        // Должен добавить 2 одинаковые книги
-    void shouldAddTwoIdenticalBookTest() {
-        prepareProduct();
-        productManager.add(book5);
-        productManager.add(book5);
-        Product[] expected = productManager.findAll();
-        Product[] actual = new Product[]{book1, book2, book3, book4, book5, smartphone1, smartphone2, smartphone3, smartphone4, smartphone5, book5, book5};
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-        // tshirt, должен вернуть пустой массив, т.к. ProductManager.matches возвращает false
-    void shouldReturnZeroTshirtTest() {
-        prepareProduct();
-        Tshirt tshirt1 = new Tshirt(12, "Tshirt", 5550, "Nike");
-        productManager.add(tshirt1);
-        String search = "Nike";
-        Product[] expected = productManager.searchBy(search);
-        Product[] actual = new Product[0];
-        assertArrayEquals(expected, actual);
-    }
 }

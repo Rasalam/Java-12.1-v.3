@@ -1,8 +1,6 @@
 package ru.netology.manager;
 
-import ru.netology.domain.Book;
 import ru.netology.domain.Product;
-import ru.netology.domain.Smartphone;
 import ru.netology.repository.ProductRepository;
 
 public class ProductManager {
@@ -29,21 +27,8 @@ public class ProductManager {
     }
 
     public boolean matches(Product product, String search) {
-        if (product instanceof Book) {
-            Book book = (Book) product;
-            if (product.getName().contains(search)) {
-                return true;
-            }
-            return book.getAuthor().contains(search);
-        }
-        if (product instanceof Smartphone) {
-            Smartphone smartphone = (Smartphone) product;
-            if (product.getName().contains(search)) {
-                return true;
-            }
-            return smartphone.getManufacturer().contains(search);
-        }
-        return false;
+        return (product.getName().contains(search));
+
     }
 
     public Product[] findAll() {
